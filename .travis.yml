@@ -2,6 +2,12 @@ language: node_js
 sudo: required
 warnings_are_errors: true
 
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "l7yEHyyvH0M0srCOqQgL4VMkzk9z6QkApL9iIzaZJWXSMXi/2z3BAcAP8aDQfgFFTHz6keZgzsMByKX6Bw9lpKY0CMkf8i6fy2v1RL3JFNCkwip8gotBkwHTHmGV6zttv0z7uE1qek2BYqvJ9Ih0GJ9EJiRgDixwbiyGd5irPpW1du6UmxRclRezVmqxYHfyaLUNpKx3zXV22IogJWfbOXeDamQosLdhBujiVmuFSWJ7zE7sDP++5Wq7cnHhkHO9jKX9EuPsxU/eoMTn6TXC51NdGHcVRS+xfkqsdl3kxRSKXA0y7azIpdTqraoB7rhybs/1nEXBMJ2AH35y4/ZC4CTa8yGsQCUS71Pqys1+KEqNNTAmY9XBHO9JvBTvRt26v5MuV7HFYoIlI4ly37fgqxCrrsdDybiUGf8APGcIhW6KRoxCxDLL5kc8q9w7JVDqiG6LOhzhJ7FLSBoxCTde13kyPIXHXXTPlecSYpCD6EkE3Rg8DXYHSwZtmeXMH8CbAM8piNAEufBQlvnVJiHHzkpRTOTu29/tXIvxC+mtiPD15fmEmWOPTw54/mRsfIpdmGS/AXPDz2gyA49vmZFM1ENKhlO1pcFEXgKkGE+HpL6GsntBgjVmj/KfsyeI64CpHKTbTi5AzAVUEQTZh1USb/2JGycyttSmHMhM8+fcZBs="
+
 node_js:
     - "0.12"
 
@@ -23,3 +29,13 @@ notifications:
   email:
     on_success: change
     on_failure: change
+
+addons:
+  coverity_scan:
+    project:
+      name: "Chicago/opengrid"
+      description: "Build submitted via Travis CI"
+    notification_email: developers@cityofchicago.org
+    build_command_prepend: "npm install"
+    build_command:   "gulp release"
+    branch_pattern: issue165
