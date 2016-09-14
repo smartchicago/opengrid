@@ -14,7 +14,8 @@ install:
 
 script:
     - gulp release
-
+    
+#himani test    
 after_success:
     - jscoverage lib lib-cov
     - gulp test-coveralls | ./node_modules/coveralls/bin/coveralls.js
